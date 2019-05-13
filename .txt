@@ -1,0 +1,22 @@
+Mounting
+
+called only once
+constructor - If state is initialized with a property initializer then it will already be set by the time the constructor executes.
+componentWillMount - Called immediately before your component mounts for the first time. Children are mounted before the parent, so each child’s componentWillMount will be called called before the parent.
+componentDidMount: Called immediately after the first render. The component’s children are already rendered at this point, too. This is a good place to make AJAX requests to fetch any data you need.
+Updating
+
+These are called, in order, before and after each render. None of them are called during the initial render.
+
+componentWillReceiveProps(nextProps): This is passed the nextProps that will be received. Old props are still available as this.props, and you can call this.setState if necessary.
+
+shouldComponentUpdate(nextProps, nextState): This is an opportunity to prevent rendering if you know that props and state have not changed. The default implementation always returns true. If you return false, the render will not occur (and children will not render either), and the remaining lifecycle methods will be skipped.
+
+componentWillUpdate(nextProps, nextState): Rendering is a foregone conclusion at this point. Use this to do any prep work before render is called. You cannot call this.setState from within this method.
+
+render: You know this one well. It fits in the lifecycle right between componentWillUpdate and componentDidUpdate.
+
+componentDidUpdate: Render is done. You can use this opportunity to operate on the DOM if you need to. Prior to this, DOM nodes could still be in flux.
+Unmounting
+
+componentWillUnmount: The component is about to be unmounted. Maybe its item was removed from a list, maybe the user navigated to another tab… whatever the case, this component’s time is numbered. You should invalidate any timers you created (using clearInterval() or clearTimeout()), disable event handlers (with removeEventListener()), and perform any other necessary cleanup.
